@@ -4,10 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x = np.linspace(0, 100, num=100)
-f = lambda x: x
 
-x, y = datagen.fromfunc(f, x)
+x, y = datagen.generate_polynomial_data(np.array([3, 1]))
 
-plt.scatter(x, y)
+plt.scatter(x[:, 0], y)
 plt.savefig('plot.png')
