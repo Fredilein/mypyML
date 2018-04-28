@@ -1,29 +1,18 @@
 import numpy as np
 import utils
 
-def cross_validation(inp_func, X, y, cv=5):
-    loss = np.array([])
+
+def cross_validation(model, X, y, cv=5):
     splits = create_splits(len(X), cv)
+    scores = []
     for s in splits:
+        # model_copy = clone(model)
         train_index, test_index = [s == 0], [s == 1]
-        res = inp_func(X[train_index], y[train_index])
-        print(res['weights'])
-        plt = utils.saveplot(f_X, f_y, res['weights'])
-    plt.savefig('cv_plot.png')
+        model.fit(X[train_index], y[train_index])
+        y_pred = model.predict(X[test_index])
+        scores.append(rmse(y[test_index], y_pred[:, -1]))
 
-
-def create_folds(X, y, n_folds):
-    xy = np.c_[X, y]
-    folds = []
-    rand = np.random.rand(len(xy))
-
-    for i in range(n_folds):
-        i_min, i_max = (i / n_folds), ((i+1) / n_folds)
-        indices = np.array([1 if (j > i_min and j < i_max) else 0 for j in rand])
-        folds.append(xy[indices == 1])
-        print("len of folds[i]:", len(folds[i]))
-
-    return folds
+    return scores
 
 
 def create_splits(n_pts, n_folds):
@@ -36,3 +25,13 @@ def create_splits(n_pts, n_folds):
         splits.append(indices)
 
     return splits
+
+
+def rmse(u, v):
+    if len(u) != len(v):
+        print("[Error] rmse can't be computed for vectors of different length")
+        return 0
+
+    n = len(u)
+    mse = sum((u-v)**2) / n
+    return np.sqrt(mse)

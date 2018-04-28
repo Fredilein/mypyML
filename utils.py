@@ -19,7 +19,7 @@ def wat_saveplot(x, y, w):
 def saveplot(x, y, w):
     x = x[:, -2]
     x_axis = np.linspace(min(x), max(x), len(y))
-    y_hat = polyval(x_axis, w[::-1])
+    y_hat = np.polyval(w, x_axis)
     
     plt.plot(x_axis, y_hat, 'r')
     plt.scatter(x, y)
