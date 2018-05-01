@@ -1,7 +1,7 @@
 import datagen
 from regression import LinearRegression
 import utils
-import validation
+from validation import cross_validation
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,10 +16,9 @@ steps = 100
 lin_reg = LinearRegression()
 lin_reg.fit(x, y)
 print("Weights:", lin_reg.weights)
-print(lin_reg.predict([5, 6, 7]))
 
 print("Crossval scores:")
-print(validation.cross_validation(LinearRegression(), x, y))
+print(cross_validation(LinearRegression(), x, y))
 
 
 # plt.plot(np.arange(steps), lin_reg['loss'])
