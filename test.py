@@ -17,6 +17,7 @@ lin_reg = LinearRegression()
 lin_reg.fit(x, y)
 print("Weights:", lin_reg.weights)
 
+
 print("Crossval scores:")
 print(cross_validation(LinearRegression(), x, y))
 
