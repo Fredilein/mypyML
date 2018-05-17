@@ -7,5 +7,8 @@ A small library for machine learning.
 **Regression**
 - Linear Regression
 
+**Classification**
+- Binary Classification
+
 **Validation**
 - K-fold Cross Validation
