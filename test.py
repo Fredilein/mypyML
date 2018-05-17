@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 
 
-ground_truth = np.array([1, 0, 0])
+ground_truth = np.array([1, 0])
 x, y = datagen.generate_polynomial_data(ground_truth, num_points=50, noise=0.6)
 
 
