@@ -20,3 +20,18 @@ def generate_polynomial_data(w, num_points=100, noise=0.6):
 
     return x1, y
 
+
+def generate_linear_separable_data(num_positive, num_negative=None, noise=0., offset=1, dim=2):
+    if num_negative is None:
+        num_negative = num_positive
+
+    x = offset + noise * np.random.randn(num_positive, dim)
+    y = 1 * np.ones((num_positive,), dtype=np.int)
+
+    x = np.concatenate((x, noise * np.random.randn(num_negative, dim)), axis=0)
+    y = np.concatenate((y, -1 * np.ones((num_negative,), dtype=np.int)), axis=0)
+
+    x = np.concatenate((x, np.ones((num_positive + num_negative, 1))), axis=1)
+
+    return x, y
+

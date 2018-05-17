@@ -1,12 +1,12 @@
 """
 regression.py
 
--- Description
+= Description =
 Used for Linear Regression Tasks.
 After constructing an object of this class you can fit a model on some input.
 
 
--- Functions
+= Functions =
 
 
 __init__
@@ -33,12 +33,7 @@ predict()
 
 
 
-
-# Imports
-
 import numpy             as np
-import matplotlib.pyplot as plt
-
 
 
 
@@ -49,7 +44,6 @@ class LinearRegression:
 
 
     def __init__(self, ada_lr=True, learning_rate=0.0001):
-        # Constructor
         self.weights       = []
         self.scores        = []
         self.loss          = []
@@ -71,21 +65,21 @@ class LinearRegression:
 
 
         # Repeat updating weights [steps] times
-        for t in range(steps):
+        for _ in range(steps):
 
             # Compute Gradient
-            sum = np.zeros(dim)
+            grad_sum = np.zeros(dim)
             for i in range(n):
-                sum += (y[i] - np.dot(w.T, X[i])) * X[i]
-            grad = -2 * sum
+                grad_sum += (y[i] - np.dot(w.T, X[i])) * X[i]
+            grad = -2 * grad_sum
 
             # Update weights
             w -= self.learning_rate * grad
 
             # Update learning rate
             if self.ada_lr:
-                if (np.linalg.norm(grad) < np.linalg.norm(grad_prev)):  self.learning_rate *= C_INC
-                else:                                                   self.learning_rate *= C_DEC
+                if (np.linalg.norm(grad) < np.linalg.norm(grad_prev)):  self.learning_rate *= self.C_INC
+                else:                                                   self.learning_rate *= self.C_DEC
                 grad_prev = grad
 
             # Compute Loss
