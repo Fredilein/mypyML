@@ -9,6 +9,7 @@ A small library for machine learning.
 
 **Classification**
 - Binary Classification
+- SVM
 
 **Validation**
 - K-fold Cross Validation
